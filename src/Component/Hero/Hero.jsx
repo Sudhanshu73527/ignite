@@ -10,18 +10,18 @@ import hero3 from "../../assets/image3.jpg";
 const slides = [
   {
     image: hero1,
-    heading: "Empowering Future Safety Engineers",
-    text: "Learn industrial safety, fire protection & risk management from experts. Build a career that saves lives & creates safer workplaces.",
+    heading: "Transform Into a Certified Safety Leader",
+    text: "Master fire protection, industrial safety & risk management with real-world training that builds careers and saves lives.",
   },
   {
     image: hero2,
-    heading: "Your Path to Industrial Safety Excellence",
-    text: "Gain practical skills in occupational health, safety audits, and compliance to become an industry-ready safety professional.",
+    heading: "Step Into the Future of Workplace Safety",
+    text: "Learn occupational health, audits, and compliance from top experts and become the professional industries rely on.",
   },
   {
     image: hero3,
-    heading: "Building Safer Workplaces, Saving Lives",
-    text: "Get trained by certified experts and master modern safety practices that reduce risks and ensure worker well-being.",
+    heading: "Create Safer Industries, Protect Every Life",
+    text: "From construction to manufacturing, gain the skills that reduce hazards, ensure compliance, and safeguard people at work.",
   },
 ];
 
@@ -36,8 +36,8 @@ const Hero = () => {
         infiniteLoop
         showStatus={false}
         showThumbs={false}
-        interval={4000}
-        transitionTime={1000}
+        interval={5000}
+        transitionTime={1200}
         showArrows={false}
         onChange={(index) => setCurrentIndex(index)}
       >
@@ -53,7 +53,7 @@ const Hero = () => {
       </Carousel>
 
       {/* Overlay Content */}
-      <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center text-white px-6">
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70 flex flex-col items-center justify-center text-center text-white px-6">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -62,10 +62,15 @@ const Hero = () => {
             exit={{ opacity: 0, y: -40 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight drop-shadow-lg">
+            <h1 className="text-4xl md:text-6xl font-extrabold leading-tight drop-shadow-lg tracking-wide">
               {slides[currentIndex].heading.split(" ").map((word, idx) =>
-                word.toLowerCase().includes("safety") ? (
-                  <span key={idx} className="text-yellow-400">
+                word.toLowerCase().includes("safety") ||
+                word.toLowerCase().includes("leader") ||
+                word.toLowerCase().includes("life") ? (
+                  <span
+                    key={idx}
+                    className="text-yellow-400 drop-shadow-md animate-pulse"
+                  >
                     {word}{" "}
                   </span>
                 ) : (
@@ -74,17 +79,17 @@ const Hero = () => {
               )}
             </h1>
 
-            <p className="mt-4 text-lg md:text-2xl max-w-3xl mx-auto">
+            <p className="mt-4 text-lg md:text-2xl max-w-3xl mx-auto opacity-90 leading-relaxed">
               {slides[currentIndex].text}
             </p>
 
             <motion.a
               href="#enroll"
               whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.3 }}
-              className="mt-6 inline-block bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-yellow-500 transition"
+              whileTap={{ scale: 0.95 }}
+              className="mt-6 inline-block bg-yellow-400 text-black px-8 py-3 rounded-full font-bold shadow-2xl hover:shadow-yellow-500/50 hover:bg-yellow-500 transition duration-300"
             >
-              Join Now
+               Enroll Today
             </motion.a>
           </motion.div>
         </AnimatePresence>

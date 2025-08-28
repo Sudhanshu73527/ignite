@@ -12,14 +12,16 @@ import {
 const courses = [
   {
     name: "IOSH",
-    descMobile: "Essential training for managers to handle workplace safety risks.",
+    descMobile:
+      "Essential training for managers to handle workplace safety risks.",
     descDesktop:
       "This internationally recognized program equips managers and supervisors with essential knowledge and practical tools to handle workplace safety. It focuses on identifying risks, implementing controls.",
     icon: ShieldCheck,
   },
   {
     name: "NEBOSH IGC",
-    descMobile: "Prestigious safety qualification covering risks & legal duties.",
+    descMobile:
+      "Prestigious safety qualification covering risks & legal duties.",
     descDesktop:
       "The NEBOSH International General Certificate is a prestigious qualification for health and safety professionals. It covers hazard identification, risk assessment, and legal responsibilities.",
     icon: BookOpen,
@@ -58,38 +60,44 @@ const containerVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.15 },
+    transition: { staggerChildren: 0.2 },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.9 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7 } },
+  hidden: { opacity: 0, y: 60, scale: 0.9 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.7, ease: "easeOut" },
+  },
 };
 
 const Course = () => {
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-yellow-50 to-gray-100">
-      <div className="container mx-auto px-6">
+    <section className="relative py-24 overflow-hidden">
+      {/* Background Gradient Animation */}
+      <div className="absolute inset-0 bg-gradient-to-br from-yellow-200 via-white to-yellow-50 animate-gradient-x"></div>
+
+      <div className="relative container mx-auto px-6 z-10">
         {/* Heading */}
         <motion.h2
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}  // ✅ animate on load
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-16"
+          className="text-4xl md:text-5xl font-extrabold text-center text-gray-900 mb-16 tracking-wide"
         >
-          <span className="relative inline-block">
-            Our Courses
-            <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-yellow-500 rounded-full"></span>
-          </span>
+          Our <span className="text-yellow-600">Courses</span>
         </motion.h2>
 
-        {/* Grid of Courses */}
+        {/* Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate="show"   // ✅ animate on load (no scroll trigger)
-          className="grid gap-8 grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
+          animate="show"
+          // ✅ Now mobile shows 2 cards, tablet 2, desktop 3
+          className="grid gap-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-3"
         >
           {courses.map((course, index) => {
             const Icon = course.icon;
@@ -97,30 +105,38 @@ const Course = () => {
               <motion.div
                 key={index}
                 variants={cardVariants}
-                whileHover={{ scale: 1.07, rotate: [0, 1.5, -1.5, 0] }}
-                transition={{ type: "spring", stiffness: 200 }}
-                className="p-6 md:p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col items-center text-center relative overflow-hidden group"
+                whileHover={{
+                  scale: 1.08,
+                  rotate: [0, 1.5, -1.5, 0],
+                  boxShadow: "0px 20px 40px rgba(0,0,0,0.2)",
+                }}
+                className="relative group p-6 bg-white/70 backdrop-blur-md border border-white/30 
+                rounded-2xl shadow-lg overflow-hidden flex flex-col items-center text-center"
               >
-                {/* Glow Effect */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-yellow-200/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-500" />
+                {/* Glow Hover Effect */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-yellow-200/30 via-transparent to-yellow-400/20 opacity-0 group-hover:opacity-100 transition duration-700 rounded-2xl"></div>
 
-                {/* Icon */}
+                {/* Floating Icon */}
                 <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 1.2, repeat: Infinity, repeatType: "reverse" }}
-                  className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-yellow-100 rounded-full mb-6 shadow-inner"
+                  animate={{ y: [0, -8, 0] }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="w-16 h-16 flex items-center justify-center bg-yellow-100 rounded-full mb-4 shadow-inner"
                 >
-                  <Icon className="w-8 h-8 md:w-10 md:h-10 text-yellow-500" />
+                  <Icon className="w-8 h-8 text-yellow-600" />
                 </motion.div>
 
                 {/* Title */}
-                <h3 className="text-base md:text-xl font-semibold text-gray-800 relative">
+                <h3 className="text-base md:text-lg font-bold text-gray-900 relative">
                   {course.name}
-                  <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full h-[2px] bg-yellow-400 transition-all duration-500"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full h-[2px] bg-yellow-500 transition-all duration-500"></span>
                 </h3>
 
-                {/* Different text for mobile vs desktop */}
-                <p className="mt-3 text-gray-600 text-xs md:text-sm block md:hidden">
+                {/* Mobile vs Desktop Desc */}
+                <p className="mt-3 text-gray-600 text-xs sm:text-sm block md:hidden">
                   {course.descMobile}
                 </p>
                 <p className="mt-3 text-gray-600 text-sm hidden md:block">

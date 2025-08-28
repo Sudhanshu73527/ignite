@@ -7,6 +7,8 @@ import Highligts from './Component/Highligts/Highligts'
 import RegisterSteps from './Component/RegisterSteps/RegisterSteps'
 import Footer from './Component/Footer/Footer'
 import Frequently from './Component/Frequently/Frequently'
+import Blog from './Component/Blog/Blog'
+import Testimonials from './Component/Testimonials/Testimonials'
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
       <Course/>
       <Keyoffering/>
       {/* <RegisterSteps/> */}
+      <Blog/>
+      <Testimonials/>
       <Highligts/>
       <Frequently/>
       <Footer/>
