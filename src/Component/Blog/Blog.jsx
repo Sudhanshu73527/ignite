@@ -1,5 +1,5 @@
 import React from "react";
-import { blogData } from "../Mockdata/blogData";
+import { blogData } from "../../mockdata/blogData.js";
 import { motion } from "framer-motion";
 
 // Shadow colors for both base and hover
